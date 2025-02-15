@@ -80,3 +80,17 @@ jobs:
            name: Code-Coverage-Result-${{matrix.operating_system}}-${{matrix.nodejs_version}}
            path: coverage
            retention-days: 5
+
+    docker:
+      name: Containerization
+      needs: [unit-testing,code-coverage]
+      runs-on: ubuntu-latest
+      steps:
+        - name: checkout Repo
+          uses: actions/checkout@v4
+
+        - name: Docker Login
+          uses: docker/login-action@v3
+          with:
+            username: ${{ vars.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD }}
