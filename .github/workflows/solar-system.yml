@@ -146,3 +146,19 @@ jobs:
             context: .
             push: true
             tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
+
+    dev-deploy:
+      needs: docker
+      runs-on: self-hosted
+      steps:
+        - name: checkout Repo
+          uses: actions/checkout@v4
+          
+        - name: Fetch kubernetes cluster details
+          run: |
+            kubectl version --short
+            echo --------------------------------
+            kubectl get nodes
+
+
+
