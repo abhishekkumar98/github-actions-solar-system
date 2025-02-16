@@ -153,7 +153,12 @@ jobs:
       steps:
         - name: checkout Repo
           uses: actions/checkout@v4
-          
+
+        - uses: Set kubeconfig file
+          with:
+            method: kubeconfig
+            kubeconfig: ${{secrets.KUBECONFIG}}
+
         - name: Fetch kubernetes cluster details
           run: |
             kubectl version --short
