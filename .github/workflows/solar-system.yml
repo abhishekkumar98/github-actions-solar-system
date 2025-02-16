@@ -144,7 +144,7 @@ jobs:
           uses: docker/build-push-action@v6
           with:
             context: .
-            push: false
+            push: true
             tags: ${{vars.DOCKERHUB_USERNAME}}/solar-system:${{github.sha}}
 
     dev-deploy:
